@@ -1,7 +1,7 @@
 "use client";
 
 import { ExtendedRecordMap } from "notion-types";
-
+import { NotionRenderer } from "react-notion-x";
 import { getPageTitle } from "notion-utils";
 
 type Props = {
@@ -15,7 +15,11 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
   }
   const title = getPageTitle(recordMap);
 
-  return <>{title}</>;
+  return (
+    <>
+      <NotionRenderer recordMap={recordMap} fullPage darkMode />
+    </>
+  );
 };
 
 export default NotionPage;
