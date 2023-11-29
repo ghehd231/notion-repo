@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Theme } from "@radix-ui/themes";
 
 import "@radix-ui/themes/styles.css";
@@ -10,6 +9,8 @@ import "prismjs/themes/prism-tomorrow.css";
 import "react-notion-x/src/styles.css";
 import "./globals.css";
 
+import Header from "./components/Header";
+
 export default function RootLayout({
   children,
 }: {
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Theme>{children}</Theme>
+        <Theme appearance="dark">
+          <Header />
+          {children}
+        </Theme>
       </body>
     </html>
   );

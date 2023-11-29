@@ -17,7 +17,15 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
 
   return (
     <>
-      <NotionRenderer recordMap={recordMap} fullPage darkMode />
+      <NotionRenderer
+        rootPageId={rootPageId}
+        pageAside={<div>test</div>}
+        recordMap={recordMap}
+        fullPage
+        darkMode
+        previewImages
+        disableHeader
+      />
     </>
   );
 };
