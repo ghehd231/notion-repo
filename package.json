@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dev": "env-cmd -f .env.development next build",
     "start": "next start",
     "lint": "next lint",
     "analyze": "ANALYZE=true next build"
@@ -13,6 +14,7 @@
     "@next/bundle-analyzer": "^14.0.3",
     "@notionhq/client": "^2.2.13",
     "@radix-ui/themes": "^2.0.1",
+    "env-cmd": "^10.1.0",
     "next": "14.0.3",
     "notion-client": "^6.16.0",
     "notion-compat": "^6.16.0",

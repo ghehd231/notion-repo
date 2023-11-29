@@ -36,3 +36,11 @@ yarn-error.log*
 next-env.d.ts
 
 .nvmrc
+
+# local env files
+.env.local
+.env.development
+.env.development.local
+.env.test.local
+.env.production
+.env.production.local
