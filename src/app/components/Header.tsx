@@ -16,7 +16,6 @@ const Header = () => {
           </Tabs.Trigger>
         </Tabs.List>
       </Tabs.Root>
-      <Flex justify="end">Flex</Flex>
     </Flex>
   );
 };

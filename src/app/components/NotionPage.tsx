@@ -21,18 +21,15 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
   }
 
   return (
-    <>
-      <NotionRenderer
-        rootPageId={rootPageId}
-        pageAside={<div>test</div>}
-        recordMap={recordMap}
-        fullPage
-        darkMode
-        previewImages
-        disableHeader
-        components={{ Collection }}
-      />
-    </>
+    <NotionRenderer
+      rootPageId={rootPageId}
+      recordMap={recordMap}
+      fullPage
+      darkMode
+      previewImages
+      disableHeader
+      components={{ Collection }}
+    />
   );
 };
 
