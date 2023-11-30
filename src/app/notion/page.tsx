@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const NotionPage = async () => {
   const page = await getPage(rootNotionPageId);
-  console.log(page);
+
   return <div>Notion Test Page</div>;
 };
 

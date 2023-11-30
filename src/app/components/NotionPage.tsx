@@ -2,18 +2,23 @@
 
 import { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";
-import { getPageTitle } from "notion-utils";
+import dynamic from "next/dynamic";
 
 type Props = {
   recordMap: ExtendedRecordMap;
   rootPageId?: string;
 };
 
+const Collection = dynamic(() =>
+  import("react-notion-x/build/third-party/collection").then(
+    (m) => m.Collection
+  )
+);
+
 const NotionPage = ({ recordMap, rootPageId }: Props) => {
   if (!recordMap) {
     return;
   }
-  const title = getPageTitle(recordMap);
 
   return (
     <>
@@ -25,6 +30,7 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
         darkMode
         previewImages
         disableHeader
+        components={{ Collection }}
       />
     </>
   );
