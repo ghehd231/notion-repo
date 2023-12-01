@@ -9,10 +9,12 @@ type Props = {
   rootPageId?: string;
 };
 
-const Collection = dynamic(() =>
-  import("react-notion-x/build/third-party/collection").then(
-    (m) => m.Collection
-  )
+const Collection = dynamic(
+  () =>
+    import("react-notion-x/build/third-party/collection").then(
+      (m) => m.Collection
+    ),
+  { ssr: false }
 );
 
 const NotionPage = ({ recordMap, rootPageId }: Props) => {
