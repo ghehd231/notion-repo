@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Theme } from "@radix-ui/themes";
 
 import "@radix-ui/themes/styles.css";
@@ -16,12 +20,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 5 * 1000,
+          },
+        },
+      })
+  );
+
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body>
         <Theme appearance="dark">
           <Header />
-          {children}
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
         </Theme>
       </body>
     </html>
