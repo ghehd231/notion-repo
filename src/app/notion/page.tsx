@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
 import { fetchDatabase } from "@/services/api/databases";
 import { useQuery } from "@tanstack/react-query";
+import { Container } from "@radix-ui/themes";
+
+import Card from "@/app/components/Card";
 
 const NotionPage = () => {
   //TODO
   // [x] database logic local api로 분리
-  // [ ] 카드 컴포넌트 생성
+  // [x] 카드 컴포넌트 생성
   // [ ] 카드 grid로 변경
   // [ ] 무한 스크롤 구현
   // [ ] search 컴포넌트 생성
@@ -16,7 +18,11 @@ const NotionPage = () => {
 
   const { data } = useQuery({ queryKey: ["table"], queryFn: fetchDatabase });
   console.log("test", data);
-  return <div>Notion Test Page</div>;
+  return (
+    <Container>
+      <Card />
+    </Container>
+  );
 };
 
 export default NotionPage;
