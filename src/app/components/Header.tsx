@@ -1,12 +1,14 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Flex, Tabs, Text } from "@radix-ui/themes";
 
 const Header = () => {
   const router = useRouter();
+  const pathName = usePathname();
+
   return (
     <Flex wrap="wrap" justify="between">
-      <Tabs.Root defaultValue="profile">
+      <Tabs.Root defaultValue={pathName === "/notion" ? "notion" : "profile"}>
         <Tabs.List>
           <Tabs.Trigger
             value="profile"

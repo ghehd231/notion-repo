@@ -13,6 +13,9 @@ import "prismjs/themes/prism-tomorrow.css";
 import "react-notion-x/src/styles.css";
 import "./globals.css";
 
+// custom radix theme
+import "@/styles/radix-theme.css";
+
 import Header from "./components/Header";
 
 export default function RootLayout({
