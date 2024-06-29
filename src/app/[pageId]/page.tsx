@@ -1,9 +1,10 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
-
-import notion from "@/app/lib/notions";
 import { getPageTitle } from "notion-utils";
 
-import { commonTitle } from "../data/metaTitle";
+import notion from "@/app/lib/notions";
+
+import { commonTitle } from "@/app/data/metaTitle";
 
 import type { Metadata } from "next";
 
@@ -27,9 +28,9 @@ const Page = async ({ params: { pageId } }: Props) => {
   const recordMap = await notion.getPage(pageId);
 
   return (
-    <>
+    <Suspense fallback={"loading..."}>
       <NotionPage recordMap={recordMap} />
-    </>
+    </Suspense>
   );
 };
 

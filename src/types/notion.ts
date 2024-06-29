@@ -1,22 +1,25 @@
-export type RowType = {
+import {
+  PageObjectResponse,
+  QueryDatabaseResponse,
+  RichTextItemResponse,
+} from "@notionhq/client/build/src/api-endpoints";
+
+export type QueryResponse = QueryDatabaseResponse;
+
+export type ResultType =
+  | Pick<QueryResponse, "results">
+  | QueryResponse["results"];
+
+export type ResultKey = Pick<PageObjectResponse, "properties" | "created_time">;
+
+export type Properties = {
+  type: "title";
+  title: Array<Partial<RichTextItemResponse>>;
   id: string;
-  name: {
-    id: string;
-    title: [
-      {
-        text: { content: string };
-      }
-    ];
-  };
-  tag: {
-    id: string;
-    name: string;
-  }[];
-  date: {
-    id: string;
-    date: {
-      start: string;
-    };
-  };
-  url: string;
+};
+
+export type CardResponseType = Properties & {
+  id: string;
+  date: string;
+  title: string;
 };

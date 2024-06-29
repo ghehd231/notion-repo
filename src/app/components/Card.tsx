@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { Box, Inset, Strong, Card, Text } from "@radix-ui/themes";
+import { CardResponseType } from "@/types/notion";
 
-const CustomCard = () => {
+type CardProps = Pick<CardResponseType, "date"> & { title: string };
+
+const CustomCard = ({ title, date }: CardProps) => {
   return (
     <Box maxWidth="240px">
       <Card size="2">
@@ -14,10 +17,9 @@ const CustomCard = () => {
           />
         </Inset>
         <Text as="p" size="3">
-          <Strong>Typography</Strong> is the art and technique of arranging type
-          to make written language legible, readable and appealing when
-          displayed.
+          <Strong>{title}</Strong>
         </Text>
+        <Text>{date}</Text>
       </Card>
     </Box>
   );
