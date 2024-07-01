@@ -21,9 +21,15 @@ export type Properties = {
   id: string;
 };
 
-export type CardResponseType = Properties & {
+export type CardInfo = Properties & {
   id: string;
   date: string;
   title: string;
   public_url: string;
+};
+
+export type CardResponseType = {
+  info: CardInfo[];
+  next_cursor: QueryResponse["next_cursor"];
+  has_more: QueryResponse["has_more"];
 };

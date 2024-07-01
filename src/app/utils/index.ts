@@ -34,15 +34,15 @@
 //  * @description breakpoint의 미디어 쿼리 조건만 반환합니다(useMedia에서 사용)
 //  * @param mediaQuery 미디어 쿼리
 //  */
-// export const getBreakpointQuery = (mediaQuery: string): string =>
-//   mediaQuery.replace(/@media /, "");
+export const getBreakpointQuery = (mediaQuery: string): string =>
+  mediaQuery.replace(/@media /, "");
 
-// export function createPortalRoot(id: string): HTMLDivElement {
-//   const root = document.createElement("div");
-//   root.setAttribute("id", id);
+export function createPortalRoot(id: string): HTMLDivElement {
+  const root = document.createElement("div");
+  root.setAttribute("id", id);
 
-//   return root;
-// }
+  return root;
+}
 
 // /**
 //  * @description 현재 window의 크기에 해당하는 breakpoint의 미디어 쿼리 key 값을 반환합니다 (return: xl, lg, md, ... )

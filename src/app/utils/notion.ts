@@ -11,9 +11,15 @@ export const getPage = async (pageId: string) => {
   return res;
 };
 
-export const retrieveDatabase = async () => {
+export const retrieveDatabase = async ({
+  next_cursor,
+}: {
+  next_cursor?: string;
+}) => {
   const query = await notion.databases.query({
     database_id: dataBaseId,
+    start_cursor: next_cursor,
+    page_size: 20,
   });
   return query;
 };

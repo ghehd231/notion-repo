@@ -35,7 +35,7 @@ export default function RootLayout({
   );
 
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en">
       <body>
         <Theme appearance="dark">
           <Header />
