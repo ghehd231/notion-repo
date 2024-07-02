@@ -1,9 +1,12 @@
+import { ClassValue, clsx } from "clsx";
 // import {
 //   differenceInDays,
 //   differenceInMonths,
 //   differenceInSeconds,
 //   parseISO,
 // } from "date-fns";
+
+import { twMerge } from "tailwind-merge";
 
 // import { breakpointsValue } from "@/styles/breakpoints";
 
@@ -28,7 +31,7 @@
 // export const replacer = (key: string, value: unknown) =>
 //   typeof value === "bigint" ? value.toString() : value;
 
-// export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
 // /**
 //  * @description breakpoint의 미디어 쿼리 조건만 반환합니다(useMedia에서 사용)

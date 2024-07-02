@@ -2,7 +2,7 @@
 
 import { type ReactNode, forwardRef, useMemo, memo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Container, Grid } from "@radix-ui/themes";
+import { Grid } from "@radix-ui/themes";
 
 import { fetchDatabase } from "@/services/api/databases";
 
@@ -67,13 +67,12 @@ const NotionPage = () => {
   );
 
   return (
-    <Container height={"100vh"}>
+    <section className="sticky top-0 flex flex-col w-full h-full max-w-screen-xl gap-4 p-3 m-auto">
       <InfiniteGrid
         items={items}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        virtuosoProps={{ components: { List: ContainerList } }}
       >
         {(index, item) => (
           <Card
@@ -85,8 +84,12 @@ const NotionPage = () => {
           />
         )}
       </InfiniteGrid>
-      {isFetchingNextPage && <div>loading</div>}
-    </Container>
+      {hasNextPage && (
+        <InfiniteGrid.LoadMore>
+          <Card.Skeleton />
+        </InfiniteGrid.LoadMore>
+      )}
+    </section>
   );
 };
 
