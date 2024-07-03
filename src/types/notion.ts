@@ -21,10 +21,36 @@ export type Properties = {
   id: string;
 };
 
-export type CardInfo = Properties & {
+export type StringRequest = string;
+export type SelectColor =
+  | "default"
+  | "gray"
+  | "brown"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "blue"
+  | "purple"
+  | "pink"
+  | "red";
+
+export type SelectPropertyResponse = {
+  id: StringRequest;
+  name: StringRequest;
+  color: SelectColor;
+};
+
+export type MultiSelectProperties = {
+  type: "multi_select";
+  multi_select: Array<SelectPropertyResponse>;
+  id: string;
+};
+
+export type CardInfo = {
   id: string;
   date: string;
   title: string;
+  tech?: MultiSelectProperties["multi_select"];
   public_url: string;
 };
 

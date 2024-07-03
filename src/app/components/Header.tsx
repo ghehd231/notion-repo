@@ -1,47 +1,55 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
-import { Flex, Tabs, Text } from "@radix-ui/themes";
+
+import { usePathname } from "next/navigation";
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+
 import { cn } from "../utils";
 
 const Header = () => {
-  const router = useRouter();
   const pathName = usePathname();
 
   return (
-    // <Flex wrap="wrap" justify="between">
-    //   <Tabs.Root defaultValue={pathName === "/notion" ? "notion" : "profile"}>
-    //     <Tabs.List>
-    //       <Tabs.Trigger
-    //         value="profile"
-    //         onClick={() => router.push("/")}
-    //         style={{ cursor: "pointer" }}
-    //       >
-    //         <Text size="3">Profile</Text>
-    //       </Tabs.Trigger>
-    //       <Tabs.Trigger
-    //         value="notion"
-    //         onClick={() => router.push("/notion")}
-    //         style={{ cursor: "pointer" }}
-    //       >
-    //         <Text size="3">Notion Blog</Text>
-    //       </Tabs.Trigger>
-    //     </Tabs.List>
-    //   </Tabs.Root>
-    // </Flex>
-    <div className="flex flex-row justify-start h-8 gap-4 p-2 cursor-pointer group">
-      <div
-        className={cn("hover:underline", pathName === "/" && "underline")}
-        onClick={() => router.push("/")}
-      >
-        Profile
-      </div>
-      <div
-        className={cn("hover:underline", pathName === "/notion" && "underline")}
-        onClick={() => router.push("/notion")}
-      >
-        Posts
-      </div>
-    </div>
+    <NavigationMenuPrimitive.Root className="sticky top-0 z-50 bg-white/85 backdrop-blur-sm shadow-[0_0.125rem_1.25rem_0_rgba(0,0,0,0.06)] transition duration-300 ease-in-out">
+      <NavigationMenuPrimitive.List className="flex flex-row p-2 space-x-2 bg-white dark:bg-gray-800">
+        <NavigationMenuPrimitive.Item asChild>
+          <NavigationMenuPrimitive.Link
+            href="/"
+            className={cn(
+              "px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+              "text-sm font-medium text-gray-700 dark:text-gray-100",
+              pathName === "/" &&
+                "border-b-[1px] border-b-slate-950 rounded-none"
+            )}
+          >
+            Resume
+          </NavigationMenuPrimitive.Link>
+        </NavigationMenuPrimitive.Item>
+        <NavigationMenuPrimitive.Item asChild>
+          <NavigationMenuPrimitive.Link
+            href="/notion"
+            className={cn(
+              "px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+              "text-sm font-medium text-gray-700 dark:text-gray-100",
+              pathName === "/notion" &&
+                "border-b-[1px] border-b-slate-950 rounded-none"
+            )}
+          >
+            Blog
+          </NavigationMenuPrimitive.Link>
+        </NavigationMenuPrimitive.Item>
+        <NavigationMenuPrimitive.Item asChild>
+          <NavigationMenuPrimitive.Link
+            href="https://github.com/ghehd231"
+            className={cn(
+              "px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+              "text-sm font-medium text-gray-700 dark:text-gray-100"
+            )}
+          >
+            GitHub
+          </NavigationMenuPrimitive.Link>
+        </NavigationMenuPrimitive.Item>
+      </NavigationMenuPrimitive.List>
+    </NavigationMenuPrimitive.Root>
   );
 };
 export default Header;

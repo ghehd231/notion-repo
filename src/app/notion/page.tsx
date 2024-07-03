@@ -2,32 +2,12 @@
 
 import { type ReactNode, forwardRef, useMemo, memo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Grid } from "@radix-ui/themes";
 
 import { fetchDatabase } from "@/services/api/databases";
 
 import Card from "@/app/components/Card";
 
 import InfiniteGrid from "@/app/components/InfiniteGrid";
-
-const ContainerList = memo(
-  forwardRef<HTMLDivElement, { children?: ReactNode }>(({ children }, ref) => {
-    return (
-      <Grid
-        as="div"
-        ref={ref}
-        mt="5"
-        mb="5"
-        justify="center"
-        columns={{ initial: "2", xs: "2", md: "4", lg: "5" }}
-        gap="3"
-      >
-        {children}
-      </Grid>
-    );
-  })
-);
-ContainerList.displayName = "List";
 
 const NotionPage = () => {
   //TODO
@@ -78,6 +58,7 @@ const NotionPage = () => {
           <Card
             key={index}
             title={item.title}
+            tech={item.tech}
             date={item.date}
             public_url={item.public_url}
             loading={isLoading}

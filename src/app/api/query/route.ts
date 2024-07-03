@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import type {
   CardInfo,
-  CardResponseType,
+  MultiSelectProperties,
   Properties,
   QueryResponse,
   ResultKey,
@@ -25,12 +25,14 @@ export async function GET(request: NextRequest) {
 
     const resultInfo = results.map((item) => {
       const { properties, created_time, public_url } = item as ResultKey;
+      const titleProperties = properties["교육"] as Properties;
+      const techProperties = properties["수행기술"] as MultiSelectProperties;
 
-      const notionProperties = properties["교육"] as Properties;
       return {
         id: item.id,
         date: created_time,
-        title: notionProperties.title[0].plain_text,
+        title: titleProperties.title[0].plain_text,
+        tech: techProperties.multi_select,
         public_url,
       } as CardInfo;
     });

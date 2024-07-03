@@ -6,9 +6,7 @@ import Link from "next/link";
 import type { CardInfo } from "@/types/notion";
 import { cn } from "../utils";
 
-// import { Box, Inset, Strong, Card, Text } from "@radix-ui/themes";
-
-type CardProps = Pick<CardInfo, "date" | "public_url"> & {
+type CardProps = Pick<CardInfo, "date" | "public_url" | "tech"> & {
   title: string;
   loading?: boolean;
 } & PropsWithChildren;
@@ -54,12 +52,7 @@ const CardWrapper: React.FC<Pick<CardProps, "public_url" | "children">> = ({
   </Link>
 );
 
-const CustomCard = ({
-  title,
-  date,
-  public_url,
-  loading = false,
-}: CardProps) => {
+const CustomCard = ({ title, date, public_url, tech }: CardProps) => {
   return (
     <CardWrapper public_url={public_url}>
       <div
@@ -70,6 +63,29 @@ const CustomCard = ({
           "shadow-none hover:shadow-[0_4px_6px_0_rgba(0,0,0,0.2)] transition-all"
         )}
       >
+        <div
+          className={cn(
+            "absolute top-[calc(50%-28px)] left-[50%]",
+            "flex flex-row justify-center flex-wrap gap-1 w-full px-2 md:px-4",
+            "invisible z-[2] rounded-lg translate-x-[-50%]",
+            "opacity-0 transition-[top,opacity] ease-in-out duration-300",
+            "group-hover:visible group-hover:top-[calc(50%-56px)] group-hover:opacity-100"
+            // "visible top-[calc(50%-56px)] opacity-100"
+          )}
+        >
+          {tech?.map((item) => (
+            <span
+              className={cn(
+                `notion-property-select-item notion-item-${item.color} opacity-100 drop-shadow-md font-semibold`,
+                "text-[12px] py-2 xs:text-[14px] xs:py-3"
+              )}
+              key={item.id}
+            >
+              {item.name}
+            </span>
+          ))}
+        </div>
+
         <figure
           className={cn(
             "relative flex flex-col items-center w-full h-full overflow-hidden rounded-lg",
@@ -86,7 +102,7 @@ const CustomCard = ({
             blurDataURL={defaultImage}
           />
         </figure>
-        <div className={cn("flex flex-col w-full h-fit px-3 pt-2 pb-4")}>
+        <div className={cn("flex flex-col w-full h-fit px-3 pt-2 gap-2")}>
           <div
             className={cn(
               "flex items-center justify-between w-full gap-2 h-[1.375rem]"
@@ -94,13 +110,15 @@ const CustomCard = ({
           >
             <span
               className={cn(
-                "h-full overflow-hidden text-ellipsis whitespace-nowrap"
+                "h-full overflow-hidden text-ellipsis whitespace-nowrap text-base md:text-lg"
               )}
             >
               {title}
             </span>
           </div>
-          <div className={cn("flex w-full mb-2 h-[1.75rem]")}>
+          <div
+            className={cn("flex w-full mb-2 h-[1.75rem] text-xs md:text-sm")}
+          >
             <span>{format(date, "yyyy-MM-dd")}</span>
           </div>
         </div>

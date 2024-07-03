@@ -27,7 +27,6 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
       rootPageId={rootPageId}
       recordMap={recordMap}
       fullPage
-      darkMode
       previewImages
       disableHeader
       components={{ Collection }}
