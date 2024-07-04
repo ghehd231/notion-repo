@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import Image from "next/image";
 
 import { cn } from "../utils";
 
@@ -9,8 +10,8 @@ const Header = () => {
   const pathName = usePathname();
 
   return (
-    <NavigationMenuPrimitive.Root className="sticky top-0 z-50 bg-white/85 backdrop-blur-sm shadow-[0_0.125rem_1.25rem_0_rgba(0,0,0,0.06)] transition duration-300 ease-in-out">
-      <NavigationMenuPrimitive.List className="flex flex-row p-2 space-x-2 bg-white dark:bg-gray-800">
+    <NavigationMenuPrimitive.Root className="sticky top-0 z-50 flex justify-between bg-white/85 backdrop-blur-sm shadow-[0_0.125rem_1.25rem_0_rgba(0,0,0,0.06)] transition duration-300 ease-in-out">
+      <NavigationMenuPrimitive.List className="flex flex-row p-2 space-x-2">
         <NavigationMenuPrimitive.Item asChild>
           <NavigationMenuPrimitive.Link
             href="/"
@@ -47,6 +48,24 @@ const Header = () => {
           >
             GitHub
           </NavigationMenuPrimitive.Link>
+        </NavigationMenuPrimitive.Item>
+      </NavigationMenuPrimitive.List>
+      <NavigationMenuPrimitive.List className="flex flex-row p-2 space-x-2">
+        <NavigationMenuPrimitive.Item
+          className={cn(
+            "flex items-center px-3 py-2 text-sm rounded-md",
+            "text-sm font-medium text-gray-700 dark:text-gray-100"
+          )}
+        >
+          <span className="gap-2 p-3 notion-property-select-item notion-item-default">
+            <Image
+              src="/image/mac-command.png"
+              width={14}
+              height={14}
+              alt="command"
+            />
+            Command + K
+          </span>
         </NavigationMenuPrimitive.Item>
       </NavigationMenuPrimitive.List>
     </NavigationMenuPrimitive.Root>

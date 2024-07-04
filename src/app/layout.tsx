@@ -19,6 +19,7 @@ import "./globals.css";
 // import "@/styles/radix-theme.css";
 
 import Header from "./components/Header";
+import Command from "./components/Command";
 
 export default function RootLayout({
   children,
@@ -45,6 +46,7 @@ export default function RootLayout({
         {/* <Theme appearance="dark"> */}
         <Header />
         <QueryClientProvider client={queryClient}>
+          <Command />
           {children}
         </QueryClientProvider>
         {/* </Theme> */}
