@@ -34,7 +34,7 @@ const Header = () => {
                 "border-b-[1px] border-b-slate-950 rounded-none"
             )}
           >
-            Blog
+            Posts
           </NavigationMenuPrimitive.Link>
         </NavigationMenuPrimitive.Item>
         <NavigationMenuPrimitive.Item asChild>
