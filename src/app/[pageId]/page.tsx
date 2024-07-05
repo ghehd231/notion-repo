@@ -15,13 +15,20 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const recordMap = await notion.getPage(params.pageId);
-  const title = getPageTitle(recordMap);
+  try {
+    const recordMap = await notion.getPage(params.pageId);
+    const title = getPageTitle(recordMap);
 
-  return {
-    title: commonTitle + title,
-    description: `about ${title}`,
-  };
+    return {
+      title: commonTitle + title,
+      description: `about ${title}`,
+    };
+  } catch (err) {
+    return {
+      title: commonTitle,
+      description: "Not found Title",
+    };
+  }
 }
 
 const Page = async ({ params: { pageId } }: Props) => {
