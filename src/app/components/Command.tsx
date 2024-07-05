@@ -5,13 +5,14 @@ import {
   SearchParameters,
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { fetchSearch } from "@/services/api/search";
 import CommandPalette, {
   JsonStructureItem,
   filterItems,
   getItemIndex,
   useHandleOpenCommandPalette,
 } from "react-cmdk";
+
+import { fetchSearch } from "@/services/api/search";
 
 import "react-cmdk/dist/cmdk.css";
 
@@ -86,8 +87,8 @@ const Command = () => {
     return filterItems(
       [
         {
-          heading: "Home",
-          id: "home",
+          heading: "Posts",
+          id: "posts",
           items: filtered,
         },
         {
