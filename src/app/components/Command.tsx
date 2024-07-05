@@ -92,20 +92,31 @@ const Command = () => {
           items: filtered,
         },
         {
-          heading: "Other",
+          heading: "Resume",
+          id: "Resume",
+          items: [
+            {
+              id: "resume",
+              children: "이력서",
+              icon: "CodeBracketIcon",
+              href: "/",
+            },
+          ],
+        },
+        {
+          heading: "Contract",
           id: "advanced",
           items: [
             {
-              id: "developer-settings",
-              children: "Developer settings",
-              icon: "CodeBracketIcon",
-              href: "#",
+              id: "github",
+              children: "https://github.com/ghehd231",
+              icon: "DocumentArrowUpIcon",
+              href: "https://github.com/ghehd231",
             },
             {
-              id: "privacy-policy",
-              children: "Privacy policy",
-              icon: "LifebuoyIcon",
-              href: "#",
+              id: "phone",
+              children: "phone: 010-7739-9829",
+              icon: "DevicePhoneMobileIcon",
             },
           ],
         },
