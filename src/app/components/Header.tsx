@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
 import { cn } from "../utils";
@@ -58,6 +59,7 @@ const Header = () => {
           )}
         >
           <span className="gap-2 p-3 notion-property-select-item notion-item-default">
+            <MagnifyingGlassIcon />
             <Image
               src="/image/mac-command.png"
               width={14}
