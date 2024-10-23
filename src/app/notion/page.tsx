@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, forwardRef, useMemo, memo } from "react";
+import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { fetchDatabase } from "@/services/api/databases";
@@ -10,16 +10,6 @@ import Card from "@/app/components/Card";
 import InfiniteGrid from "@/app/components/InfiniteGrid";
 
 const NotionPage = () => {
-  //TODO
-  // [x] database logic local api로 분리
-  // [x] 카드 컴포넌트 생성
-  // [x] notion query 데이터 파싱
-  // [x] 카드 grid로 변경
-  // [x] 무한 스크롤 구현
-  // [x] search 컴포넌트 생성
-  // [x] search 기능 구현
-  // [ ] 페이지 이동 시, 렌더링 시 loading 구현
-
   const fetchDatabasePage = async (pageParam: string) => {
     const { info, next_cursor, has_more } = await fetchDatabase({
       next_cursor: pageParam,
