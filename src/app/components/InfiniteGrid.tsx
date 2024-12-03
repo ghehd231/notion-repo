@@ -15,6 +15,7 @@ type InfiniteScrollGridProps<Item> = {
   items: Item[];
   fetchNextPage: () => void;
   hasNextPage: boolean;
+  isLoading: boolean;
   isFetchingNextPage: boolean;
   children?: GridItemContent<Item, unknown>;
   virtuosoProps?: VirtuosoGridProps<Item>;
@@ -57,6 +58,7 @@ const LoadMoreItems = ({ children }: { children: ReactElement }) => {
 const InfiniteGrid = <Item,>({
   items,
   fetchNextPage,
+  isLoading,
   hasNextPage,
   isFetchingNextPage,
   virtuosoProps,
@@ -67,6 +69,11 @@ const InfiniteGrid = <Item,>({
     getBreakpointQuery("@media (max-width: 375px)"),
     false
   );
+
+  if (isLoading) {
+    return <div className="min-h-[calc(100vh-270px)]">loading</div>;
+  }
+
   return (
     <VirtuosoGrid
       useWindowScroll

@@ -40,6 +40,7 @@ const NotionPage = () => {
     <section className="sticky top-0 flex flex-col w-full h-full max-w-screen-xl gap-4 p-3 m-auto mb-28">
       <InfiniteGrid
         items={items}
+        isLoading={isLoading}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
