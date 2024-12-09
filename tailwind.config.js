@@ -17,6 +17,7 @@ module.exports = {
       xl: "1920px",
     },
   },
+  darkMode: "selector",
   plugins: [
     // Initialize with default values (see options below)
     require("tailwindcss-radix")({
