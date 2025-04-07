@@ -29,6 +29,7 @@
     "react-cmdk": "^1.3.9",
     "react-dom": "19.1.0",
     "react-notion-x": "7.3.0",
+    "react-use": "^17.6.0",
     "react-virtuoso": "^4.7.11",
     "rodash": "^1.0.2",
     "tailwind-merge": "^2.3.0",

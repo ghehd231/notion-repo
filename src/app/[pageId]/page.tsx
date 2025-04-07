@@ -11,12 +11,13 @@ import type { Metadata } from "next";
 const NotionPage = dynamic(() => import("@/app/components/NotionPage"));
 
 type Props = {
-  params: { pageId: string };
+  params: Promise<{ pageId: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const recordMap = await notion.getPage(params.pageId);
+    const { pageId } = await params;
+    const recordMap = await notion.getPage(pageId);
     const title = getPageTitle(recordMap);
 
     return {
@@ -31,7 +32,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const Page = async ({ params: { pageId } }: Props) => {
+const Page = async ({ params }: Props) => {
+  const { pageId } = await params;
   const recordMap = await notion.getPage(pageId);
 
   return (
