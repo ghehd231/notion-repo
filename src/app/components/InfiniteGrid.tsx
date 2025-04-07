@@ -1,3 +1,5 @@
+"use client";
+
 import { type ReactElement, cloneElement } from "react";
 import { useMedia } from "react-use";
 import {
