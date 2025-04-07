@@ -29,6 +29,7 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
       fullPage
       previewImages
       disableHeader
+      showCollectionViewDropdown
       components={{ Collection }}
     />
   );

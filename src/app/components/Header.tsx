@@ -10,8 +10,8 @@ import Tab from "./Tab";
 
 const Header = () => {
   return (
-    <NavigationMenuPrimitive.Root className="sticky top-0 z-50 flex justify-between bg-white/85 backdrop-blur-sm shadow-[0_0.125rem_1.25rem_0_rgba(0,0,0,0.06)] transition duration-300 ease-in-out">
-      <NavigationMenuPrimitive.List className="flex flex-row p-2 space-x-1 xs:space-x-2">
+    <NavigationMenuPrimitive.Root className="sticky top-0 z-50 flex justify-between w-full bg-white/85 backdrop-blur-sm shadow-[0_0.125rem_1.25rem_0_rgba(0,0,0,0.06)] transition duration-300 ease-in-out">
+      <NavigationMenuPrimitive.List className="flex flex-row w-full p-2 space-x-1 xs:space-x-2">
         <Tab title="Resume" href="/" />
         <Tab title="Posts" href="/notion" />
         <Tab title="Github" href="https://github.com/ghehd231" />
