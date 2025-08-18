@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 type Message = {
   id: number;
   text: string;
-  sender: "user" | "gemini";
+  sender: "user" | "chatbot";
 };
 
 const Chatting = () => {
@@ -21,13 +21,13 @@ const Chatting = () => {
     {
       id: 1,
       text: "안녕하세요",
-      sender: "gemini",
+      sender: "chatbot",
     },
     { id: 2, text: "질문에 대답해줘.", sender: "user" },
   ]);
 
   const chatMutation = useMutation({
-    mutationFn: async (query) => {
+    mutationFn: async (query: string): Promise<Message> => {
       const res = await fetch("/ask", {
         method: "POST",
         headers: {
@@ -41,13 +41,20 @@ const Chatting = () => {
       }
 
       const data = await res.json();
-      return data;
+      const responseMessage: Message = {
+        id: messages.length + 2,
+        text: data.message,
+        sender: "chatbot",
+      };
+      return responseMessage;
     },
     onSuccess: (data) => {
-      setResponse(data.message);
+      setMessages((prevMessages) => [...prevMessages, data]);
+      setIsLoading(false);
     },
     onError: (error) => {
       setResponse(`오류: ${error.message}`);
+      setIsLoading(false);
     },
   });
 
@@ -87,16 +94,7 @@ const Chatting = () => {
 
       setIsLoading(true); // 로딩 시작
 
-      // Gemini 응답 시뮬레이션
-      setTimeout(() => {
-        const geminiMessage: Message = {
-          id: messages.length + 2,
-          text: "요청하신 내용을 처리했습니다.",
-          sender: "gemini",
-        };
-        setMessages((prevMessages) => [...prevMessages, geminiMessage]);
-        setIsLoading(false); // 로딩 종료
-      }, 1500); // 1.5초 후 응답
+      chatMutation.mutate(userMessageText);
     }
   };
 
