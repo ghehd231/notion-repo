@@ -11,6 +11,7 @@ const nextConfig = {
       },
     ],
   },
+  staticPageGenerationTimeout: 180, //build timeout
   async rewrites() {
     return [
       {

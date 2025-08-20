@@ -8,6 +8,9 @@ import notion from "./lib/notions";
 
 import NotionPage from "./components/NotionPage";
 
+// 이 페이지를 동적으로 렌더링하도록 설정
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const recordMap = await notion.getPage(rootNotionPageId);
   const title = getPageTitle(recordMap);
@@ -23,7 +26,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const recordMap = await notion.getPage(rootNotionPageId); //getting notion data on Server Side
-
   return (
     <main>
       <NotionPage recordMap={recordMap} rootPageId={rootNotionPageId} />
