@@ -1,23 +1,33 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+// 메시지 데이터 타입 정의
+type Message = {
+  id: number;
+  text: string;
+  sender: "user" | "chatbot";
+};
 
 const Chatting = () => {
   const [response, setResponse] = useState("");
   const [isInputEmpty, setIsInputEmpty] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const inputRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState([
     {
       id: 1,
       text: "안녕하세요",
-      sender: "gemini",
+      sender: "chatbot",
     },
     { id: 2, text: "질문에 대답해줘.", sender: "user" },
   ]);
 
-  const mutation = useMutation({
-    mutationFn: async (query) => {
+  const chatMutation = useMutation({
+    mutationFn: async (query: string): Promise<Message> => {
       const res = await fetch("/ask", {
         method: "POST",
         headers: {
@@ -31,18 +41,61 @@ const Chatting = () => {
       }
 
       const data = await res.json();
-      return data;
+      const responseMessage: Message = {
+        id: messages.length + 2,
+        text: data.message,
+        sender: "chatbot",
+      };
+      return responseMessage;
     },
     onSuccess: (data) => {
-      setResponse(data.message);
+      setMessages((prevMessages) => [...prevMessages, data]);
+      setIsLoading(false);
     },
     onError: (error) => {
       setResponse(`오류: ${error.message}`);
+      setIsLoading(false);
     },
   });
 
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
-    setIsInputEmpty(e.currentTarget.innerText.trim().length === 0);
+    setIsInputEmpty(e.currentTarget.innerText.length === 0);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault(); //기본 줄바꿈 동작 방지
+      handleSendClick();
+    }
+  };
+
+  const handleSendClick = () => {
+    if (
+      !isLoading &&
+      inputRef.current &&
+      inputRef.current.innerText.trim().length > 0
+    ) {
+      const userMessageText = inputRef.current.innerText.trim();
+      if (isInputEmpty) {
+        inputRef.current.focus();
+        return;
+      }
+
+      const newUserMessage: Message = {
+        id: messages.length + 1,
+        text: userMessageText,
+        sender: "user",
+      };
+
+      // 사용자 메시지 추가
+      setMessages((prevMessages) => [...prevMessages, newUserMessage]);
+      inputRef.current!.innerText = ""; // 입력창 비우기
+      setIsInputEmpty(true);
+
+      setIsLoading(true); // 로딩 시작
+
+      chatMutation.mutate(userMessageText);
+    }
   };
 
   return (
@@ -66,6 +119,18 @@ const Chatting = () => {
             </div>
           </div>
         ))}
+        {/* 로딩 상태일 때만 로딩 컴포넌트 렌더링 */}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="max-w-xs p-3 text-black bg-gray-200 shadow-lg md:p-4 rounded-3xl sm:max-w-sm md:max-w-lg rounded-bl-md">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-pulse-fast"></div>
+                <div className="w-2 h-2 delay-75 bg-gray-500 rounded-full animate-pulse-fast"></div>
+                <div className="w-2 h-2 delay-150 bg-gray-500 rounded-full animate-pulse-fast"></div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       <footer className="sticky bottom-0 flex justify-center w-full p-4 bg-gray-100 border-t border-gray-300">
@@ -77,6 +142,8 @@ const Chatting = () => {
             onBlur={(e) =>
               setIsInputEmpty(e.currentTarget.innerText.trim().length === 0)
             }
+            onKeyDown={handleKeyDown}
+            ref={inputRef}
             className="relative flex-1 p-3 md:p-4 rounded-2xl bg-white text-black resize-none outline-none focus:ring-2 focus:ring-blue-500/60 transition-shadow min-h-[48px] overflow-hidden flex items-center"
           >
             {isInputEmpty && (
@@ -85,7 +152,10 @@ const Chatting = () => {
               </span>
             )}
           </div>
-          <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 text-white transition-all duration-200 bg-blue-500 rounded-full shadow-lg cursor-pointer hover:bg-blue-600">
+          <div
+            onClick={handleSendClick}
+            className="flex items-center justify-center flex-shrink-0 w-12 h-12 text-white transition-all duration-200 bg-blue-500 rounded-full shadow-lg cursor-pointer hover:bg-blue-600"
+          >
             <svg
               className="w-5 h-5 md:w-6 md:h-6 transform translate-x-[1px]"
               fill="currentColor"
