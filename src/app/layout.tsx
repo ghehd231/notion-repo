@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { pretendard, robotoMono, sofiaSans } from "@/app/assets/fonts";
 
 // used for rendering equations (optional)
@@ -15,23 +11,13 @@ import "./globals.css";
 import Header from "./components/Header";
 import Command from "./components/Command";
 import Footer from "./components/Footer";
+import Providers from "./components/Providers";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 5 * 1000,
-          },
-        },
-      })
-  );
-
   return (
     <html
       lang="en"
@@ -39,10 +25,10 @@ export default function RootLayout({
     >
       <body>
         <Header />
-        <QueryClientProvider client={queryClient}>
+        <Providers>
           <Command />
           {children}
-        </QueryClientProvider>
+        </Providers>
         <Footer />
       </body>
     </html>
