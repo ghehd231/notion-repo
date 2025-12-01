@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { getPageTitle } from "notion-utils";
 
-import notion from "@/app/lib/notions";
+import { getPage } from "@/app/lib/notions";
 
 import { commonTitle } from "@/app/data/metaTitle";
 
@@ -17,7 +17,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { pageId } = await params;
-    const recordMap = await notion.getPage(pageId);
+    const recordMap = await getPage(pageId);
     const title = getPageTitle(recordMap);
 
     return {
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const { pageId } = await params;
-  const recordMap = await notion.getPage(pageId);
+  const recordMap = await getPage(pageId);
 
   return (
     <Suspense fallback={"loading..."}>
