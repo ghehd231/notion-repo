@@ -15,7 +15,7 @@ import { ResponseError, internalServerError } from "@/services/api/error";
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const cursor = url.searchParams.get("next_cursor") || "";
+    const cursor = url.searchParams.get("next_cursor");
 
     const query: QueryResponse = await retrieveDatabase({
       next_cursor: !!cursor ? cursor : undefined,
@@ -48,6 +48,7 @@ export async function GET(request: NextRequest) {
         status: error.status,
       });
     }
+
     return Response.json(internalServerError, { status: 500 });
   }
 }

@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import {
   PageObjectResponse,
   SearchParameters,
-  TextRichTextItemResponse,
+  RichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import CommandPalette, {
   JsonStructureItem,
@@ -20,7 +20,7 @@ import "react-cmdk/dist/cmdk.css";
 
 type Properties = {
   type: "title";
-  title: Array<TextRichTextItemResponse>;
+  title: Array<RichTextItemResponse>;
   id: string;
 };
 
