@@ -89,6 +89,23 @@ const Command = () => {
     return filterItems(
       [
         {
+          heading: "Contact Me",
+          id: "advanced",
+          items: [
+            {
+              id: "github",
+              children: "move to github",
+              icon: "ArrowTopRightOnSquareIcon",
+              href: "https://github.com/ghehd231",
+            },
+            {
+              id: "phone",
+              children: "phone: 010-7739-9829",
+              icon: "DevicePhoneMobileIcon",
+            },
+          ],
+        },
+        {
           heading: "Posts",
           id: "posts",
           items: filtered,
@@ -102,23 +119,6 @@ const Command = () => {
               children: "이력서",
               icon: "CodeBracketIcon",
               href: "/",
-            },
-          ],
-        },
-        {
-          heading: "Contract",
-          id: "advanced",
-          items: [
-            {
-              id: "github",
-              children: "https://github.com/ghehd231",
-              icon: "DocumentArrowUpIcon",
-              href: "https://github.com/ghehd231",
-            },
-            {
-              id: "phone",
-              children: "phone: 010-7739-9829",
-              icon: "DevicePhoneMobileIcon",
             },
           ],
         },
