@@ -13,10 +13,28 @@ type Props = {
 };
 
 // ...existing code...
-const Collection = dynamic(
-  () => import("react-notion-x").then((m: any) => m.Collection),
-  { ssr: false }
-);
+
+const Collection = dynamic(async () => {
+  try {
+    const mod = await import("react-notion-x/build/third-party/collection");
+    return (mod as any).default ?? (mod as any).Collection ?? (() => null);
+  } catch (e) {
+    // fallback to noop component if import fails
+    return () => null;
+  }
+}, { ssr: false });
+
+const Code = dynamic(async () => {
+  try {
+    const mod = await import("react-notion-x/build/third-party/code");
+    return (mod as any).default ?? (mod as any).Code ?? (() => null);
+  } catch (e) {
+    // eslint-disable-next-line react/display-name
+    return ({ code }: { code?: string }) => (
+      <pre className="notion-code">{code ?? ""}</pre>
+    );
+  }
+}, { ssr: false });
 
 const NotionPage = ({ recordMap, rootPageId }: Props) => {
   if (!recordMap) {
@@ -31,7 +49,7 @@ const NotionPage = ({ recordMap, rootPageId }: Props) => {
       previewImages
       disableHeader
       showCollectionViewDropdown
-      components={{ Collection }}
+      components={{ Collection, Code }}
     />
   );
 };
