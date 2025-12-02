@@ -1,10 +1,10 @@
 import {
   PageObjectResponse,
-  QueryDatabaseResponse,
+  QueryDataSourceResponse,
   RichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
-export type QueryResponse = QueryDatabaseResponse;
+export type QueryResponse = QueryDataSourceResponse;
 
 export type ResultType =
   | Pick<QueryResponse, "results">
@@ -12,7 +12,7 @@ export type ResultType =
 
 export type ResultKey = Pick<
   PageObjectResponse,
-  "properties" | "created_time" | "public_url"
+  "id" | "properties" | "created_time" | "public_url"
 >;
 
 export type Properties = {

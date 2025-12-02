@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 
-import { dataBaseId } from "@/app/lib/config";
+import { dataSourceId } from "@/app/lib/config";
 import { SearchParameters } from "@notionhq/client/build/src/api-endpoints";
 
 const notion = new Client({
@@ -17,8 +17,8 @@ export const retrieveDatabase = async ({
 }: {
   next_cursor?: string;
 }) => {
-  const query = await notion.databases.query({
-    database_id: dataBaseId,
+  const query = await notion.dataSources.query({
+    data_source_id: dataSourceId,
     start_cursor: next_cursor,
     page_size: 20,
   });
