@@ -12,8 +12,6 @@ type Props = {
   rootPageId?: string;
 };
 
-// ...existing code...
-
 const Collection = dynamic(async () => {
   try {
     const mod = await import("react-notion-x/build/third-party/collection");
@@ -35,6 +33,7 @@ const Code = dynamic(async () => {
     );
   }
 }, { ssr: false });
+
 
 const NotionPage = ({ recordMap, rootPageId }: Props) => {
   if (!recordMap) {
