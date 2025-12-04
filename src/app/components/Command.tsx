@@ -147,7 +147,9 @@ const Command = () => {
                   {...rest}
                 >
                   <span className="max-w-md truncate dark:text-white">
-                    {rest.children}
+                    {Array.isArray(rest.children) && rest.children.length === 0
+                      ? "this item has no title"
+                      : rest.children}
                   </span>
                 </CommandPalette.ListItem>
               ))}
@@ -157,8 +159,6 @@ const Command = () => {
           <CommandPalette.FreeSearchAction />
         )}
       </CommandPalette.Page>
-
-      <CommandPalette.Page id="projects">test</CommandPalette.Page>
     </CommandPalette>
   );
 };
