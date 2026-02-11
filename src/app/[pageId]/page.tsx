@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 import { getPageTitle } from "notion-utils";
 
 import { getPage } from "@/app/lib/notions";
@@ -8,7 +8,9 @@ import { commonTitle } from "@/app/data/metaTitle";
 
 import type { Metadata } from "next";
 
-const NotionPage = dynamic(() => import("@/app/components/NotionPage"));
+export const dynamic = 'force-dynamic';
+
+const NotionPage = dynamicImport(() => import("@/app/components/NotionPage"));
 
 type Props = {
   params: Promise<{ pageId: string }>;

@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Command from "./components/Command";
 import Footer from "./components/Footer";
 import Providers from "./components/Providers";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 export default function RootLayout({
   children,
@@ -26,8 +27,10 @@ export default function RootLayout({
       <body>
         <Header />
         <Providers>
-          <Command />
-          {children}
+          <ErrorBoundary>
+            <Command />
+            {children}
+          </ErrorBoundary>
         </Providers>
         <Footer />
       </body>
