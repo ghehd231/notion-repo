@@ -44,3 +44,8 @@ next-env.d.ts
 .env.test.local
 .env.production
 .env.production.local
+
+# opencode config (contains API tokens)
+.opencode/
+opencode.json
+oh-my-opencode.json
